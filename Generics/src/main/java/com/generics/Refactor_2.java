@@ -1,49 +1,47 @@
 package com.generics;
 
+import java.awt.print.Printable;
 
 //Generic class extends Comparable class
 public class Refactor_2<T extends Comparable<T>> {
-	
-	public T x,y,z;
-	
-	//Paramerterized Constructor
+
+	public T x, y, z;
+
+	// Paramerterized Constructor
 	public Refactor_2(T x, T y, T z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
-	
-	//Generic Method to find Max values
-	public static  <T extends Comparable<T>> T findMax(T x,T y, T z) {
-		T max = x;
-	
-		if(y.compareTo(max)> 0) {
-			max = y;
+
+	// Generic Method to find Max values
+	public static <T extends Comparable<T>> T findMax(T... arr) {
+		T max = arr[0];
+		for (int i = 0; i < arr.length; i++) {
+			if (arr[i].compareTo(max) > 0) {
+				max = arr[i];
+			}
 		}
-		if(z.compareTo(max)>0) {
-			max = z;
-		}
-	
+		// Internally called printMax method
+		printMax(max);
 		return max;
 	}
-	//method to get value
-	
-	public void testMax() {
-		T maxVal = findMax(x,y,z);
-		System.out.println("Max is " +maxVal);	
+
+	// method to get value
+	// Extended max method to print max
+	public static <T> void printMax(T maxVal) {
+		System.out.println("Max is " + maxVal);
 	}
 
-
 	public static void main(String[] args) {
-		Refactor_2<Integer> iInt = new Refactor_2<Integer>(20, 10, 30);  //declare value
-		Refactor_2<String> sString = new Refactor_2<String>("Apple", "Banana", "Papaya"); //declare value
-		Refactor_2<Float> ffloat = new Refactor_2<Float>(20.1f, 10.3f, 30.4f); //declare value
-		
+		Integer intArr[] = {10, 22, 20, 30}; //declare integer array value
+		String strArr[] = {"Deven" ,"Aakash", "Ganseh" }; //declare String array value
+		Float floatArr[] = {10.2f, 2.1f, 30.4f};  //declare float array value
 		
 		//calling generic method for all values
-		iInt.testMax();
-		sString.testMax();
-		ffloat.testMax();
+		findMax(intArr);
+		findMax(strArr);
+		findMax(floatArr);
 	}
 
 }
